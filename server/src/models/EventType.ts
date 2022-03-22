@@ -18,10 +18,10 @@ class EventType extends Model<EventTypeAttributes, EventTypeCreationAttributes> 
     public id!  : number;
     public name!: string;
 
-    public examples?: Array<Event>;
+    public event?: Array<Event>;
 
     public static associations: {
-        examples: Association<EventType, Event>;
+        events: Association<EventType, Event>;
     }
 }
 
