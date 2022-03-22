@@ -4,7 +4,6 @@ import { Router, Request, Response } from "express";
 import Example                       from "../models/Example";
 import ErrorMessage                  from "../libs/error";
 import Logger                        from "../libs/log/Logger";
-import { Sequelize }                 from "sequelize/dist";
 import Store                         from "../libs/store";
 
 

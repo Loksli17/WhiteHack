@@ -1,15 +1,23 @@
 <script setup lang="ts">
+    
     import { inject, onMounted, ref }              from 'vue';
     import type { ToastPluginApi }                 from 'vue-toast-notification';
+<<<<<<< HEAD
     import { useUserStore }                        from '@/stores/user';
 
     import SideBar                                 from "@/components/SideBar/SideBar.vue";
     import type EventAttributes from '@/types/Event';
+=======
+    import { useUserStore } from '@/stores/user';
+    import EventService from './../services/EventService';
+>>>>>>> 24bc45374cc39ef91d5f3326286f9dce29e3c4ef
 
     const Toast = inject("Toast") as ToastPluginApi;
 
     const store = useUserStore();
+    
     console.log(store.user);
+    
     store.changeUser({
         foo: "bar"
     });
@@ -28,6 +36,11 @@
             lon: 160.85
         }
     ]);
+
+
+    EventService.getAll({limit: 10, offset: 0, regionId: 1}).then((value: any) => {
+        console.log(value);
+    });
 
     onMounted(async () => {
         // @ts-ignore

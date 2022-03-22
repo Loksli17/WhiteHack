@@ -21,6 +21,7 @@ interface EventAttributes{
     description: string;
     authorId   : number;
     eventTypeId: number;
+    regionId   : number;
 }
 
 
@@ -36,6 +37,7 @@ class Event extends Model<EventAttributes, EventCreationAttributes> implements E
     public description!: string;
     public authorId!   : number;
     public eventTypeId!: number;
+    public regionId!   : number;
 }
 
 
@@ -100,6 +102,11 @@ Event.init({
     },
 
     eventTypeId: {
+        type     : DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+    },
+
+    regionId: {
         type     : DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
     }
