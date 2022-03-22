@@ -1,14 +1,26 @@
 <script setup lang="ts">
     
-    import { inject, onMounted, ref }              from 'vue';
+    import { inject, onMounted, ref } from 'vue';
+    import type {Ref}                 from 'vue';
+
     import type { ToastPluginApi }                 from 'vue-toast-notification';
-    import { useUserStore } from '@/stores/user';
-    import EventService from './../services/EventService';
+    import { useUserStore }        from '@/stores/user';
+    
+    import type { Region }          from './../types/Region';
+    import type { EventAttributes } from './../types/Event';
+
+    import RegionService from './../services/RegionService';
+    import EventService  from './../services/EventService';
+
+
 
     const Toast = inject("Toast") as ToastPluginApi;
 
     const store = useUserStore();
     
+    let regions: Ref<Array<Region>>          = ref([]);
+    let events : Ref<Array<EventAttributes>> = ref([]);
+
     console.log(store.user);
     
     store.changeUser({
@@ -18,9 +30,15 @@
     console.log(store.user?.foo);
 
 
-    EventService.getAll({limit: 10, offset: 0, regionId: 1}).then((value: any) => {
-        console.log(value);
+    RegionService.getAll().then((value: any) => {
+        regions.value = value.data.regions;
     });
+
+    EventService.getAll({limit: 10, offset: 0, regionId: 1}).then((value: any) => {
+        events.value = value.data.events;
+    });
+
+    console.log(regions, events);
 
     onMounted(async () => {
         // @ts-ignore

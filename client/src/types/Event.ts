@@ -1,4 +1,4 @@
-export default interface EventAttributes{
+export type EventAttributes = {
     id         : number;
     date       : Date;
     time       : string;
