@@ -1,6 +1,7 @@
 import { Optional, Model, DataTypes, Association, CreateOptions } from 'sequelize';
 import sequelize    from '../config/database';
 import Event        from './Event';
+import UserHasEvent from './UserHasEvent';
 
 
 interface UserAttributes{
@@ -83,5 +84,13 @@ User.hasMany(Event, {
 
 Event.belongsTo(User);
 
+
+User.hasMany(UserHasEvent, {
+    sourceKey : 'id',
+    foreignKey: 'userId',
+    as        : 'userHasImages', 
+});
+
+UserHasEvent.belongsTo(User);
 
 export default User;

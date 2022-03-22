@@ -1,12 +1,13 @@
 import { DataCheck, NumberParamCheck, SaveUploadedFile } from '../libs/decorators';
 
-import { Router, Request, Response } from "express";
+import e, { Router, Request, Response } from "express";
 import Event                         from "../models/Event";
 import User                          from "../models/User";
 import EventImage                    from '../models/EventImage';
 import EventType                     from "../models/EventType";
 import ErrorMessage                  from "../libs/error";
 import Logger                        from "../libs/log/Logger";
+import UserHasEvent from '../models/UserHasEvent';
 
 
 
@@ -46,10 +47,9 @@ export default class ExampleController {
     private static async getOne(req: Request, res: Response): Promise<void> {
 
         let 
+            users: Array<UserHasEvent> = [],
             event: Event | null,
             id   : number = Number(req.params.id);
-
-            console.log(req.params);
 
         if(id == undefined) {
             res.status(400).send({error: ErrorMessage.dataNotSended('id')});
@@ -57,14 +57,20 @@ export default class ExampleController {
         }
 
         try {
-            event = await Event.findOne({where: {id: id}, include: [{model: EventImage, as: 'images'}]});
+            event = await Event.findOne({where: {id: id}, include: [{model: EventImage, as: 'images'}, {model: User}]});
+
+            users = await UserHasEvent.findAll({
+                where  : {eventId: event?.get('id')},
+                include: [{model: User}],
+            });
+
         } catch (error) {
             console.error(error);
             res.status(400).send({error: ErrorMessage.db()});
             return;
         }
 
-        res.send({event: event});
+        res.send({event: event, users: users});
     }
 
     
