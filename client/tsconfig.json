@@ -2,10 +2,12 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
+    // "target": "ESNEXT",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
+    "lib": ["ESNext"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": true
