@@ -47,16 +47,19 @@
 
                 for (const region of regions.value) {
                     // @ts-ignore
-                    const circle = new ymaps.GeoObject({
-                        geometry: {
-                            type: "Circle",
-                            coordinates: [region.lattitude, region.longitude],
-                            radius: 500,
+                    const circle = new ymaps.GeoObject(
+                        {
+                            geometry: {
+                                type: "Circle",
+                                coordinates: [region.lattitude, region.longitude],
+                                radius: 500,
+                            }
                         },
-                        options: {
-                            fillColor: "0066ff99",
+                        {
+                            fillColor: "ff000080",
+                            strokeColor: "ff8080"
                         }
-                    });
+                    );
 
                     circle.events.add("click", (event: any) => {
                         event.preventDefault();
@@ -69,6 +72,8 @@
 
                         regionId.value = region.id;
                     });
+
+                    circle.events.add("dblclick", (event: any) => event.preventDefault());
     
                     map.geoObjects.add(circle);
                 }
