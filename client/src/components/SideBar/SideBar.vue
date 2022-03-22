@@ -47,5 +47,6 @@
         padding: 20px;
         // box-sizing: border-box;
         border-radius: 8px;
+        overflow-y: auto;
     }
 </style>
