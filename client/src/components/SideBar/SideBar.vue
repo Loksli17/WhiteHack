@@ -50,5 +50,6 @@
         // box-sizing: border-box;
         border-radius: 8px;
         overflow-y: auto;
+        width: 400px;
     }
 </style>
