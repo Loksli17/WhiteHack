@@ -1,6 +1,9 @@
 import { Optional, Model, DataTypes, Association, CreateOptions } from 'sequelize';
+
 import sequelize    from '../config/database';
 import parser       from '../libs/parser';
+import EventImage   from './EventImage';
+import User         from './User';
 
 
 export interface EventForm {
@@ -19,7 +22,7 @@ interface EventAttributes{
     time       : string;
     address    : string;
     description: string;
-    authorId   : number;
+    userId   : number;
     eventTypeId: number;
     regionId   : number;
 }
@@ -35,9 +38,15 @@ class Event extends Model<EventAttributes, EventCreationAttributes> implements E
     public time!       : string;
     public address!    : string;
     public description!: string;
-    public authorId!   : number;
+    public userId!   : number;
     public eventTypeId!: number;
     public regionId!   : number;
+
+    public images?: Array<EventImage>;
+    
+    public static associations: {
+        images: Association<Event, EventImage>;
+    }
 }
 
 
@@ -96,7 +105,7 @@ Event.init({
         }
     },
 
-    authorId: {
+    userId: {
         type     : DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
     },
@@ -127,5 +136,14 @@ Event.init({
     sequelize,
     timestamps: false,
 });
+
+
+Event.hasMany(EventImage, {
+    sourceKey : 'id',
+    foreignKey: 'eventId',
+    as        : 'images', 
+});
+
+EventImage.belongsTo(Event);
 
 export default Event;
