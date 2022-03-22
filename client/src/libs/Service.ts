@@ -1,7 +1,3 @@
-import { AxiosResponse } from 'axios';
-import { flashMessage }  from '@smartweb/vue-flash-message';
-
-
 class DecoratorFactory { 
 
     public static createDecoratorAfter(handler: (data: any) => any){
@@ -49,25 +45,25 @@ export default abstract class Service {
         return DecoratorFactory.createDecoratorAfter(handler);
     }
 
-    protected static checkResponse(response: AxiosResponse, statusList: Array<number>, textError: string = "Query returned bad status"){
+    protected static checkResponse(response: any, statusList: Array<number>, textError: string = "Query returned bad status"){
 
         if(!statusList.includes(response.status)){
-            flashMessage.show({
-                blockClass: 'error',
-                image     : require("@/assets/img/flash/error.svg"),
-                title     : 'Server Error',
-                text      : textError,
-            });
+            // flashMessage.show({
+            //     blockClass: 'error',
+            //     image     : require("@/assets/img/flash/error.svg"),
+            //     title     : 'Server Error',
+            //     text      : textError,
+            // });
         }
     }
 
     public static errorMessage(status: number){
         
-        flashMessage.show({
-            blockClass: 'error',
-            image     : require("@/assets/img/flash/error.svg"),
-            title     : 'Server Error',
-            text      : `Query returned status ${status}. Please press f5 that update your page`,
-        })
+        // flashMessage.show({
+        //     blockClass: 'error',
+        //     image     : require("@/assets/img/flash/error.svg"),
+        //     title     : 'Server Error',
+        //     text      : `Query returned status ${status}. Please press f5 that update your page`,
+        // })
     }
 }

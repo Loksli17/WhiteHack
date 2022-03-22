@@ -1,6 +1,5 @@
-import Service                              from "@/libs/Service";
-import axios, { AxiosResponse, AxiosError } from "axios";
-import Event                                from "@/types/Event";
+import Service from "@/libs/Service";
+import axios   from "redaxios"; 
 // import { LoadingFile }                      from '@/components/FileUpload/types';
 // import { FormDataView }                     from '@/components/Form/types';
 
@@ -36,9 +35,9 @@ import Event                                from "@/types/Event";
 export default class EventService extends Service {
 
     // @decorators.normalExamples()
-    public static async getAll(data: {limit: number, offset: number}): Promise<AxiosResponse | undefined> {
+    public static async getAll(data: {limit: number, offset: number, regionId: number}): Promise<any | undefined> {
         
-        const response: AxiosResponse | void = await axios.post('/example/get-all', data)
+        const response: any | void = await axios.post('/event/get-all', data)
         .catch((reason: any) => {
             if(reason.response == undefined) return;
         });
@@ -49,19 +48,19 @@ export default class EventService extends Service {
     }
 
 
-    public static async getAmount(data: {statusTypeId: number}): Promise<AxiosResponse | undefined> {
-        const response: AxiosResponse | void = await axios.post(
-            `/example/get-amount`,
-            data,
-        )
-        .catch((reason: any) => {
-            if(reason.response == undefined) return;
-        });
+    // public static async getAmount(data: {statusTypeId: number}): Promise<any | undefined> {
+    //     const response: any | void = await axios.post(
+    //         `/example/get-amount`,
+    //         data,
+    //     )
+    //     .catch((reason: any) => {
+    //         if(reason.response == undefined) return;
+    //     });
 
-        if(response == undefined) return;
+    //     if(response == undefined) return;
 
-        return response;
-    }
+    //     return response;
+    // }
 
 
     // public static async getAmountPublic(): Promise<AxiosResponse | undefined> {

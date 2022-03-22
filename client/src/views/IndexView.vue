@@ -3,6 +3,7 @@
     import { inject, onMounted, ref }              from 'vue';
     import type { ToastPluginApi }                 from 'vue-toast-notification';
     import { useUserStore } from '@/stores/user';
+    import EventService from './../services/EventService';
 
     const Toast = inject("Toast") as ToastPluginApi;
 
@@ -14,7 +15,12 @@
         foo: "bar"
     });
 
-    console.log(store.user?.foo)
+    console.log(store.user?.foo);
+
+
+    EventService.getAll({limit: 10, offset: 0, regionId: 1}).then((value: any) => {
+        console.log(value);
+    });
 
     onMounted(async () => {
         // @ts-ignore

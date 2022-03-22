@@ -14,7 +14,7 @@ export default class ExampleController {
     private static router: Router = Router();
     
 
-    @DataCheck <{limit: number; offset: number}> (['limit', 'offset'])
+    @DataCheck <{limit: number; offset: number}> (['limit', 'offset', 'regionId'])
     private static async getAll(req: Request, res: Response): Promise<void> {
 
         let 
@@ -28,6 +28,7 @@ export default class ExampleController {
                 limit     : Number(limit), 
                 offset    : Number(offset),
                 order     : [['id', 'desc']],
+                where     : {regionId: 1},
                 include   : [{model: EventType}, {model: User, }]
             });
         } catch (error) {
