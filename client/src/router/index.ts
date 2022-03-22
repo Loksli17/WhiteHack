@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import IndexView                          from '../views/IndexView.vue';
 
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -9,6 +10,13 @@ const router = createRouter({
             name: 'home',
             component: IndexView
         },
+
+        {
+            path: '/event/:id',
+            name: 'view',
+            component: () => import('../views/OneEventView.vue'),
+        },
+        
         {
             path: '/about',
             name: 'about',

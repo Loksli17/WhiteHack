@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <router-link :to="`/events/${element.id}`">
+    <router-link :to="`/event/${element.id}`">
         <div class="side-bar-list-element">
             <h3>{{ element.EventType.name }}</h3>
             <p>{{ element.description }}</p>

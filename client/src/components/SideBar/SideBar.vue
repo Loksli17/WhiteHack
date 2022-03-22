@@ -20,7 +20,9 @@
         set(newList: Array<EventAttributes>) {
             emit("update:list", newList);
         }
-    })
+    });
+
+    
 </script>
 
 <template>
