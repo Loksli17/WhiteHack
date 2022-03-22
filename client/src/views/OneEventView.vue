@@ -69,6 +69,15 @@
                                 <h3>Что нужно взять с собой</h3>
                                 <p>{{event.tools}}</p>
                             </div>
+
+                            <div class="category">
+                                <img src="" alt="">
+                                <span>{{event.EventType.name}}</span>
+                            </div>
+
+                            <div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,11 +91,8 @@
                 </div>
             </div>
         </div>
-
-        
-        
-        
     </main>
+
 </template>
 
 
@@ -137,7 +143,7 @@
                     font-size: 20px;
                 }
 
-                .desc-wrap{
+                .desc-wrap, .tools {
 
                     h3{
                         margin-top: 40px;
@@ -147,11 +153,17 @@
                         font-size: 21px;
                     }
                 }
+
+                .category{
+                    span {
+                        font-size: 19px;
+                    }
+                }
+                
             }
             
 
             .map{
-                height: 400px;
 
                 #map {
                     width: 100%;

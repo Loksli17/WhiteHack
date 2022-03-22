@@ -27,6 +27,9 @@ interface EventAttributes{
     regionId   : number;
     name       : string;
     points     : number;
+    tools      : string;
+    longitude  : number;
+    lattitude  : number;
 }
 
 
@@ -45,6 +48,10 @@ class Event extends Model<EventAttributes, EventCreationAttributes> implements E
     public regionId!   : number;
     public name!       : string;
     public points!     : number;
+    public tools!      : string;
+    public longitude!  : number;
+    public lattitude!  : number;
+
 
     public images?: Array<EventImage>;
     
@@ -126,6 +133,28 @@ Event.init({
                 msg: 'Описание должно содежрать от 10 то 500 символов!',
             },
         }
+    },
+
+    tools: {
+        type     : DataTypes.STRING(500),
+        allowNull: false,
+        validate : {
+            notNull: {
+                msg: 'Описание должно содежрать от 10 то 500 символов!',
+            },
+            len: {
+                args: [10, 500],
+                msg: 'Описание должно содежрать от 10 то 500 символов!',
+            },
+        }
+    },
+
+    longitude: {
+        type     : DataTypes.FLOAT,
+    },
+
+    lattitude: {
+        type     : DataTypes.FLOAT,
     },
 
     userId: {
