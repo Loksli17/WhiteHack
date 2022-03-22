@@ -26,7 +26,7 @@
 <template>
     <div class="side-bar">
         <div>
-            <h1>Регионы {{ id }}</h1>
+            <h1>Регион {{ id }}</h1>
             <button @click="$emit('close')">close</button>
         </div>
         <SideBarList :list="listComputed" />
@@ -38,14 +38,14 @@
         position: fixed;
         top: 10px;
         left: 10px;
-        // height: 90%;
+        display: grid;
+        grid-template-rows: max-content 85%;
+        height: 80%;
         z-index: 2000;
         background-color: white;
-        // overflow: hidden;
+        overflow: hidden;
         padding: 20px;
-        box-sizing: border-box;
+        // box-sizing: border-box;
         border-radius: 8px;
-        display: grid;
-        grid-template-rows: max-content auto;
     }
 </style>

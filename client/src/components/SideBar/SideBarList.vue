@@ -18,7 +18,11 @@
 
 <style lang="scss">
     .side-bar-list {
-        // overflow-y: auto;
-        // height: 100%;
+        overflow-y: auto;
+        
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-rows: auto;
+        row-gap: 10px;
     }
 </style>
