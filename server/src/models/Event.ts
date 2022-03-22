@@ -20,6 +20,7 @@ interface EventAttributes{
     address    : string;
     description: string;
     authorId   : number;
+    eventTypeId: number;
 }
 
 
@@ -34,7 +35,7 @@ class Event extends Model<EventAttributes, EventCreationAttributes> implements E
     public address!    : string;
     public description!: string;
     public authorId!   : number;
-
+    public eventTypeId!: number;
 }
 
 
@@ -96,6 +97,11 @@ Event.init({
     authorId: {
         type     : DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+    },
+
+    eventTypeId: {
+        type     : DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
     }
 
 }, {
@@ -114,3 +120,5 @@ Event.init({
     sequelize,
     timestamps: false,
 });
+
+export default Event;
