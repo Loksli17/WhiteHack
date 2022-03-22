@@ -17,6 +17,12 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
     public id!  : number;
     public name!: string;
 
+    public events?: Array<Event>;
+
+    public static associations: {
+        events: Association<User, Event>;
+    }
+
 }
 
 
@@ -71,11 +77,11 @@ User.init({
 
 User.hasMany(Event, {
     sourceKey : 'id',
-    foreignKey: 'authorId',
+    foreignKey: 'userId',
     as        : 'events' 
 });
 
-Event.belongsTo(Event);
+Event.belongsTo(User);
 
 
 export default User;
