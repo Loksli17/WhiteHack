@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import type EventAttributes from "@/types/Event";
+    import type {EventAttributes} from "@/types/Event";
 
     defineProps<{
         element: EventAttributes

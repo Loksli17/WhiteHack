@@ -18,26 +18,16 @@
 
     const store = useUserStore();
     
-    let regions: Ref<Array<Region>>          = ref([]);
-    let events : Ref<Array<EventAttributes>> = ref([]);
-
-    console.log(store.user);
+    const 
+        regions: Ref<Array<Region>>          = ref([]),
+        events : Ref<Array<EventAttributes>> = ref([]),
+        regionId: Ref<number> = ref(0);
+    
+    const showSideBar = ref(false);
     
     store.changeUser({
         foo: "bar"
     });
-    console.log(store.user?.foo);
-
-
-
-    const list = ref([] as Array<EventAttributes>);
-
-
-    EventService.getAll({limit: 10, offset: 0, regionId: 1}).then((value: any) => {
-        events.value = value.data.events;
-    });
-
-    console.log(regions.value.length, events);
 
     onMounted(async () => {
         RegionService.getAll().then((value: any) => {
@@ -71,8 +61,13 @@
                     circle.events.add("click", (event: any) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        
-                        console.log("click!");
+
+                        EventService.getAll({limit: 10, offset: 0, regionId: region.id}).then((value: any) => {
+                            events.value = value.data.events;
+                            showSideBar.value = true;
+                        });
+
+                        regionId.value = region.id;
                     });
     
                     map.geoObjects.add(circle);
@@ -86,9 +81,11 @@
 </script>
 
 <template>
-    <!-- <aside>
-        <SideBar v-model:list="list" />
-    </aside> -->
+    <SideBar 
+        v-model:list="events" 
+        v-show="showSideBar"
+        :id="regionId"
+        @close="showSideBar = !showSideBar" />
     <main>
         <div id="map"></div>
     </main>
