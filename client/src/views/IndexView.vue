@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    
     import { inject, onMounted, ref }              from 'vue';
     import type { ToastPluginApi }                 from 'vue-toast-notification';
     import { useUserStore } from '@/stores/user';
@@ -6,10 +7,13 @@
     const Toast = inject("Toast") as ToastPluginApi;
 
     const store = useUserStore();
+    
     console.log(store.user);
+    
     store.changeUser({
         foo: "bar"
     });
+
     console.log(store.user?.foo)
 
     onMounted(async () => {
