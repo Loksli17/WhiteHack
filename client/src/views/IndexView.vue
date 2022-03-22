@@ -42,11 +42,7 @@
     onMounted(async () => {
         RegionService.getAll().then((value: any) => {
     
-            regions.value = value.data.regions.map((value: any) => {
-                value.lattitude = 53.05;
-                value.longitude = 158.68;
-                return value;
-            });
+            regions.value = value.data.regions;
 
 
             // @ts-ignore
@@ -74,6 +70,7 @@
 
                     circle.events.add("click", (event: any) => {
                         event.preventDefault();
+                        event.stopPropagation();
                         
                         console.log("click!");
                     });
