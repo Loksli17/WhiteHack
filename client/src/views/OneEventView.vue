@@ -85,18 +85,37 @@
                             </div>
 
                             <div class="category">
-                                <img src="" alt="">
-                                <span>{{event.EventType.name}}</span>
+                                <h3>Категория</h3>
+                                <div>
+                                    <img src="" alt="">
+                                    <span>{{event.EventType.name}}</span>
+                                </div>
                             </div>
 
-                            <div>
+                            <div class="add-content">
+                                <div class="date">{{event.date}}</div>
+                                <div class="time">{{event.time}}</div>
 
+                                <div class="tags">
+                                    <div class="tag">Активна</div>
+                                    <div class="tag">Без-ограничений</div>
+                                    <div class="tag">Эко-центр</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row-2">
+                    <div></div>
+                    <div>
+                        <button>
+                            Подать заявку
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row-3">
                     <div class="image-wrap">
                         <div v-for="image in event.images" :key="image.id" class="img">
                             <div>{{image.file}}</div>
@@ -174,6 +193,40 @@
                     }
                 }
                 
+                .add-content{
+                    margin-top: 30px;
+                    display: grid;
+                    grid-auto-flow: column;
+                    grid-auto-columns: max-content;
+                    column-gap: 20px;
+                    align-items: center;
+
+                    .date, .time {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+
+                    .time{
+                        margin-right: 20px;
+                    }
+
+                    .tags{
+                        display: grid;
+                        width: 500px;
+                        grid-auto-flow: column;
+                        grid-auto-columns: max-content;
+                        column-gap: 15px;
+
+                        .tag{
+                            color: #0D58B3;
+                            padding: 8px;
+                            border: 1.5px solid;
+                            border-radius: 14px;
+                            font-size: 19px;
+                        }
+                    }
+                }
+                
             }
             
 
@@ -186,8 +239,26 @@
             }
         }
 
-
         .row-2{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 30px;
+            column-gap: 50px;
+
+            button{
+                padding: 15px;
+                font-size: 19px;
+                filter: drop-shadow(0px 4px 4px rgba(255, 105, 71, 0.25));
+                border: 0;
+                background: #FF6947;
+                color: #fff;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+
+
+        .row-3{
             margin-top: 40px;
         }
 
