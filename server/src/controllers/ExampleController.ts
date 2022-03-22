@@ -45,7 +45,7 @@ export default class ExampleController {
             return;
         }
 
-        Logger.info({url: req.originalUrl, status: 200});
+
         res.status(200).send({examples: examples});
     }
 

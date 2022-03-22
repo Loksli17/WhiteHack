@@ -125,7 +125,7 @@ CREATE TABLE `region` (
 
 LOCK TABLES `region` WRITE;
 /*!40000 ALTER TABLE `region` DISABLE KEYS */;
-INSERT INTO `region` VALUES (1,'Краснофлотский район',0,160.1,57),(2,'Центральный район',1,160.2,57),(3,'Железнедорожный район',2,160.3,57),(4,'Южный микрорайно',0,160.4,57);
+INSERT INTO `region` VALUES (1,'Краснофлотский район',0,158.72,53.01),(2,'Центральный район',1,158.68,53.06),(3,'Железнедорожный район',2,158.65,53.05),(4,'Южный микрорайно',0,158.63,53.035);
 /*!40000 ALTER TABLE `region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-22 15:11:50
+-- Dump completed on 2022-03-22 15:47:23
