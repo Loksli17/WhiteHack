@@ -12,21 +12,39 @@
 
     let event: Ref<EventAttributes> = ref({} as EventAttributes);
 
-    EventService.getOne(id).then((value: any) => {
-        event.value = value.data.event;
-        console.log(event.value);
-    });
 
     onMounted(async () => {
-
-        // @ts-ignore
-            ymaps.ready(() => {
+        EventService.getOne(id).then((value: any) => {
+            event.value = value.data.event;
+            
+            const [lat, long] = [event.value.lattitude, event.value.longitude];
+            
             // @ts-ignore
-            const map = new ymaps.Map("map", {
-                center: [53.01, 158.72],
-                zoom: 12
-            }, {
-                searchControlProvider: 'yandex#search'
+            ymaps.ready(() => {
+                // @ts-ignore
+                const map = new ymaps.Map("map", {
+                    center: [lat, long],
+                    zoom: 12
+                }, {
+                    searchControlProvider: 'yandex#search'
+                });
+
+                // @ts-ignore
+                const circle = new ymaps.GeoObject(
+                    {
+                        geometry: {
+                            type: "Circle",
+                            coordinates: [lat, long],
+                            radius: 200
+                        }
+                    },
+                    {
+                        fillColor: "ff000080",
+                        strokeColor: "ff8080"
+                    }
+                );
+
+                map.geoObjects.add(circle);
             });
         });
     });

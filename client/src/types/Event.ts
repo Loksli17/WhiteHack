@@ -1,3 +1,5 @@
+import type { User } from "./User";
+
 export type EventAttributes = {
     
     id         : number;
@@ -24,4 +26,6 @@ export type EventAttributes = {
         id     : number;
         eventId: number
     }>
+
+    User: User;
 }
