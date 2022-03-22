@@ -33,7 +33,16 @@
                 <div class="content">
                     <div v-if="event.EventType">
                         <span>Организатор: {{event.User.name}}</span>
-                        <h1>{{event.EventType.name}}</h1>
+                        <h1>{{event.name}}</h1>
+
+                        <div class="point">
+                            + {{event.points}} баллов
+                        </div>
+
+                        <div class="desc-wrap">
+                            <h4>Описание</h4>
+                            <p>{{event.description}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
