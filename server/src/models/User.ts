@@ -1,6 +1,6 @@
 import { Optional, Model, DataTypes, Association, CreateOptions } from 'sequelize';
 import sequelize    from '../config/database';
-
+import Event        from './Event';
 
 
 interface UserAttributes{
@@ -9,10 +9,10 @@ interface UserAttributes{
 }
 
 
-export interface ExampleCreationAttributes extends Optional<UserAttributes, 'id'> {}
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 
-class Example extends Model<UserAttributes, ExampleCreationAttributes> implements UserAttributes {
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
 
     public id!  : number;
     public name!: string;
@@ -20,7 +20,7 @@ class Example extends Model<UserAttributes, ExampleCreationAttributes> implement
 }
 
 
-Example.init({
+User.init({
 
     id: {
         type         : DataTypes.INTEGER.UNSIGNED,
@@ -46,18 +46,18 @@ Example.init({
 }, {
 
     // hooks: {
-    //     beforeSave: (example: Example, options: CreateOptions<Example>) => {
-    //         example.set('name',  parser.escapeTags(example.get('name')));
-    //         example.set('color', parser.escapeTags(example.get('color')));
+    //     beforeSave: (User: User, options: CreateOptions<User>) => {
+    //         User.set('name',  parser.escapeTags(User.get('name')));
+    //         User.set('color', parser.escapeTags(User.get('color')));
 
-    //         let checkPrice: boolean = Number.isNaN(Number(example.get('price')))
+    //         let checkPrice: boolean = Number.isNaN(Number(User.get('price')))
 
     //         if(checkPrice){
-    //             example.set('price', 0);
+    //             User.set('price', 0);
     //         }
                 
-    //         example.set('description', parser.escapeTags(
-    //             example.get('description'), 
+    //         User.set('description', parser.escapeTags(
+    //             User.get('description'), 
     //             ['p', 'strong', 'em', 'u', 's', 'br', 'ol', 'li', 'ul'],
     //         ));
     //     },
@@ -67,3 +67,15 @@ Example.init({
     sequelize,
     timestamps: false,
 });
+
+
+User.hasMany(Event, {
+    sourceKey : 'id',
+    foreignKey: 'authorId',
+    as        : 'events' 
+});
+
+Event.belongsTo(Event);
+
+
+export default User;
