@@ -20,9 +20,10 @@ export default class ExampleController {
     private static async getAll(req: Request, res: Response): Promise<void> {
 
         let 
-            limit : number         = req.body.limit,
-            offset: number         = req.body.offset,
-            events: Array<Event> = [];
+            limit   : number       = req.body.limit,
+            offset  : number       = req.body.offset,
+            regionId: number     = req.body.regionId,
+            events  : Array<Event> = [];
 
         try {
             events = await Event.findAll({
@@ -30,7 +31,7 @@ export default class ExampleController {
                 limit     : Number(limit), 
                 offset    : Number(offset),
                 order     : [['id', 'desc']],
-                where     : {regionId: 1},
+                where     : {regionId: regionId},
                 include   : [{model: EventType}, {model: User}]
             });
         } catch (error) {
