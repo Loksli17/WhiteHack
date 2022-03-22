@@ -72,7 +72,7 @@
                         radius: 5000
                     },
                     options: {
-                        fillColor: "00696969"
+                        fillColor: "0066ff99"
                     }
                 })
 
