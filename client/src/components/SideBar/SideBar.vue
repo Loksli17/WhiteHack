@@ -1,14 +1,16 @@
 <script setup lang="ts">
-    import type EventAttributes from '@/types/Event';
+    import type { EventAttributes } from '@/types/Event';
     import { computed } from 'vue';
     import SideBarList          from "./SideBarList.vue";
 
     const props = defineProps<{
-        list: Array<EventAttributes>
+        id: number;
+        list: Array<EventAttributes>;
     }>();
 
     const emit = defineEmits<{
-        (e: "update:list", value: Array<EventAttributes>): void
+        (e: "update:list", value: Array<EventAttributes>): void;
+        (e: "close"): void;
     }>();
 
     const listComputed = computed({
@@ -22,8 +24,28 @@
 </script>
 
 <template>
-    <div>
-        <h1>epic list haha</h1>
+    <div class="side-bar">
+        <div>
+            <h1>Регионы {{ id }}</h1>
+            <button @click="$emit('close')">close</button>
+        </div>
         <SideBarList :list="listComputed" />
     </div>
 </template>
+
+<style lang="scss" scoped>
+    .side-bar {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        // height: 90%;
+        z-index: 2000;
+        background-color: white;
+        // overflow: hidden;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        display: grid;
+        grid-template-rows: max-content auto;
+    }
+</style>
