@@ -37,10 +37,6 @@
                             coordinates: [lat, long],
                             radius: 200
                         }
-                    },
-                    {
-                        fillColor: "ff000080",
-                        strokeColor: "ff8080"
                     }
                 );
 

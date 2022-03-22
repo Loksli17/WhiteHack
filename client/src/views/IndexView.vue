@@ -34,6 +34,20 @@
     
             regions.value = value.data.regions;
 
+            const colors = [
+                {
+                    fillColor: "ff000080",
+                    strokeColor: "ff8080"
+                },
+                {
+                    fillColor: "ffff0080",
+                    strokeColor: "ffff00"
+                },
+                {
+                    fillColor: "00ff0080",
+                    strokeColor: "00ff00"
+                }
+            ]
 
             // @ts-ignore
             ymaps.ready(() => {
@@ -56,8 +70,8 @@
                             }
                         },
                         {
-                            fillColor: "ff000080",
-                            strokeColor: "ff8080"
+                            fillColor: colors[region.pollutionDegree].fillColor,
+                            strokeColor: colors[region.pollutionDegree].strokeColor
                         }
                     );
 
