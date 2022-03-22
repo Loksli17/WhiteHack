@@ -1,6 +1,6 @@
 <script setup lang="ts">
     
-    import { inject, onMounted, ref } from 'vue';
+    import { inject, onMounted, ref, watch } from 'vue';
     import type {Ref}                 from 'vue';
 
     import type { ToastPluginApi }                 from 'vue-toast-notification';
@@ -29,56 +29,56 @@
     console.log(store.user?.foo);
 
 
-    RegionService.getAll().then((value: any) => {
-        regions.value = value.data.regions;
-    });
-    const list = ref([] as Array<EventAttributes>);
 
-    const regionList = ref([
-        {
-            lat: 57,
-            lon: 160
-        },
-        {
-            lat: 56.32,
-            lon: 160.85
-        }
-    ]);
+    const list = ref([] as Array<EventAttributes>);
 
 
     EventService.getAll({limit: 10, offset: 0, regionId: 1}).then((value: any) => {
         events.value = value.data.events;
     });
 
-    console.log(regions, events);
+    console.log(regions.value.length, events);
 
     onMounted(async () => {
-        // @ts-ignore
-        ymaps.ready(() => {
+        RegionService.getAll().then((value: any) => {
+    
+            regions.value = value.data.regions;
+
+
             // @ts-ignore
-            const map = new ymaps.Map("map", {
-                center: [57, 160],
-                zoom: 8
-            }, {
-                searchControlProvider: 'yandex#search'
-            });
-
-            for (const region of regionList.value) {
+            ymaps.ready(() => {
                 // @ts-ignore
-                const circle = new ymaps.GeoObject({
-                    geometry: {
-                        type: "Circle",
-                        coordinates: [...Object.values(region)],
-                        radius: 5000
-                    },
-                    options: {
-                        fillColor: "0066ff99"
-                    }
-                })
+                const map = new ymaps.Map("map", {
+                    center: [53.01, 158.72],
+                    zoom: 12
+                }, {
+                    searchControlProvider: 'yandex#search'
+                });
 
-                map.geoObjects.add(circle);
-            }
-        })
+                for (const region of regions.value) {
+                    // @ts-ignore
+                    const circle = new ymaps.GeoObject({
+                        geometry: {
+                            type: "Circle",
+                            coordinates: [region.lattitude, region.longitude],
+                            radius: 500,
+                        },
+                        options: {
+                            fillColor: "00696969"
+                        }
+                    });
+
+                    circle.events.add("click", (event: any) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        console.log("click!");
+                    });
+    
+                    map.geoObjects.add(circle);
+                }
+            });
+        });
     });
 
 
