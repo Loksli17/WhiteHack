@@ -22,9 +22,11 @@ interface EventAttributes{
     time       : string;
     address    : string;
     description: string;
-    userId   : number;
+    userId     : number;
     eventTypeId: number;
     regionId   : number;
+    name       : string;
+    points     : number;
 }
 
 
@@ -38,9 +40,11 @@ class Event extends Model<EventAttributes, EventCreationAttributes> implements E
     public time!       : string;
     public address!    : string;
     public description!: string;
-    public userId!   : number;
+    public userId!     : number;
     public eventTypeId!: number;
     public regionId!   : number;
+    public name!       : string;
+    public points!     : number;
 
     public images?: Array<EventImage>;
     
@@ -64,6 +68,20 @@ Event.init({
     },
 
     time: {
+        type     : DataTypes.STRING(20),
+        allowNull: false,
+        validate : {
+            notNull: {
+                msg: 'Введите правильное время!',
+            },
+            len: {
+                args: [8, 8],
+                msg: 'Введите правильное время!',
+            },
+        }
+    },
+
+    name: {
         type     : DataTypes.STRING(500),
         allowNull: false,
         validate : {
@@ -75,6 +93,11 @@ Event.init({
                 msg: 'Введите правильное время!',
             },
         }
+    },
+
+    points: {
+        type     : DataTypes.INTEGER,
+        allowNull: false,
     },
 
     address: {

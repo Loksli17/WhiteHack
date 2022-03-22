@@ -6,7 +6,7 @@ import type { EventAttributes } from "@/types/Event";
 import type { User }            from '@types/User';
 
 
-const normalExample = (data: {event: EventAttributes, users: Array<User>}): any => {
+const normalEvent = (data: {event: EventAttributes, users: Array<User>}): any => {
     
     let event: Record<string, any> = data.event;
     event.users = data.users;
@@ -25,10 +25,10 @@ const decorators = {
     //     });
     // },
 
-    normalExample: () => {
+    normalEvent: () => {
         return Service.createDecoratorAfter((response: any): any | undefined => {
             if(response == undefined || response.status != 200) return response;
-            response.data.example = normalExample(response.data);
+            response.data.event = normalEvent(response.data);
             return response;
         })
     }
@@ -51,10 +51,10 @@ export default class EventService extends Service {
     }
 
 
-    @decorators.normalExample()
+    @decorators.normalEvent()
     public static async getOne(id: number){
 
-        const response: any | void = await axios.post(`/event/get-all/${id}`)
+        const response: any | void = await axios.get(`/event/get-one/${id}`)
         .catch((reason: any) => {
             if(reason.response == undefined) return;
         });

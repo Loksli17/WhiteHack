@@ -1,20 +1,53 @@
 <script setup lang="ts">
     
-    import EventService from '../services/EventService';
-    import { useRoute }       from 'vue-router';
+    import EventService        from '../services/EventService';
+    import { useRoute }        from 'vue-router';
+    import type { EventAttributes } from '../types/Event';
+    import type { Ref } from 'vue';
+    import { ref } from 'vue';
 
     const route = useRoute();
 
-    console.log(route.params.id);
+    const id: number = Number(route.params.id);
 
-    // EventService.getOne();
+    let event: Ref<EventAttributes> = ref({} as EventAttributes);
 
+    EventService.getOne(id).then((value: any) => {
+        event.value = value.data.event;
+        console.log(event.value);
+    });
 
 </script>
 
+
 <template>
     <main>
-        <div id="map"></div>
+
+        <div class="wrapper">
+
+            <div class="row-1">
+                <div class="map">
+                
+                </div>
+
+                <div class="content">
+                    <div v-if="event.EventType">
+                        <span>Организатор: {{event.User.name}}</span>
+                        <h1>{{event.EventType.name}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-2">
+                <div class="image-wrap">
+                    <div v-for="image in event.images" :key="image.id" class="img">
+                        <div>{{image.file}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
     </main>
 </template>
 

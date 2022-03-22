@@ -7,11 +7,12 @@ import EventImage                    from '../models/EventImage';
 import EventType                     from "../models/EventType";
 import ErrorMessage                  from "../libs/error";
 import Logger                        from "../libs/log/Logger";
-import UserHasEvent from '../models/UserHasEvent';
+import UserHasEvent                  from '../models/UserHasEvent';
+import Region                        from '../models/Region';
 
 
 
-export default class ExampleController {
+export default class EventController {
 
     private static router: Router = Router();
     
@@ -58,7 +59,15 @@ export default class ExampleController {
         }
 
         try {
-            event = await Event.findOne({where: {id: id}, include: [{model: EventImage, as: 'images'}, {model: User}]});
+            event = await Event.findOne({
+                where: {id: id}, 
+                include: [
+                    {model: EventImage, as: 'images'}, 
+                    {model: User}, 
+                    {model: EventType},
+                    {model: Region},
+                ]
+            });
 
             users = await UserHasEvent.findAll({
                 where  : {eventId: event?.get('id')},
